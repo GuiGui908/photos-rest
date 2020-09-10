@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  ggportal-front:
+    container_name: ggportal-front
+    image: ggportal-front:latest
+    ports:
+      - 80:80
+
+  ggportal-back:
+    container_name: ggportal-back
+    image: ggportal-back:latest
+    volumes:
+      - ./back/conf/application.properties:/application.properties:ro
+    ports:
+      - 8080:8080
+    depends_on:
+      - ggportal-db
+  
+  ggportal-db:
+    container_name: ggportal-db
+    image: mysql:8
+    environment:
+      - MYSQL_DATABASE=db_portal
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=portal_owner
+      - MYSQL_PASSWORD=superSecuredPassword
+    volumes:
+      - ./db/data:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+  ggportal-adminer:
+    container_name: ggportal-adminer
+    image: adminer
+    ports:
+      - 8081:8080
+
