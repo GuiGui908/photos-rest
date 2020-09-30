@@ -5,9 +5,12 @@ services:
     container_name: ggportal-front
     image: arm32v7/ggportal-front:latest
     volumes:
-      - ./front/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./front/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./front/nginx/raspberry.crt:/etc/nginx/ssl/raspberry.crt:ro
+      - ./front/nginx/raspberry_private.key:/etc/nginx/ssl/raspberry_private.key:ro
     ports:
       - 80:80
+      - 443:443
     depends_on:
       - ggportal-back
 
