@@ -3,15 +3,17 @@ version: "3.8"
 services:
   ggportal-front:
     container_name: ggportal-front
-    image: armv7/ggportal-front:latest
+    image: arm32v7/ggportal-front:latest
     volumes:
       - ./front/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
     ports:
       - 80:80
+    depends_on:
+      - ggportal-back
 
   ggportal-back:
     container_name: ggportal-back
-    image: armv7/ggportal-back:latest
+    image: arm32v7/ggportal-back:latest
     volumes:
       - ./back/conf/application.properties:/application.properties:ro
     ports:
@@ -21,20 +23,19 @@ services:
   
   ggportal-db:
     container_name: ggportal-db
-    image: armv7/mysql:8
+    image: arm32v7/postgres:13-alpine
     environment:
-      - MYSQL_DATABASE=db_portal
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_USER=portal_owner
-      - MYSQL_PASSWORD=superSecuredPassword
+      - POSTGRES_DB=db_portal
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=superSecuredPassword
     volumes:
-      - ./db/data:/var/lib/mysql
+      - ./db/init.sh:/docker-entrypoint-initdb.d/init.sh
+      - ./db/data:/var/lib/postgresql/data
     ports:
-      - 3306:3306
+      - 5432:5432
 
   ggportal-adminer:
     container_name: ggportal-adminer
-    image: armv7/adminer
+    image: arm32v7/adminer
     ports:
       - 8090:8080
-
