@@ -5,14 +5,21 @@ services:
     container_name: ggportal-front
     image: arm32v7/ggportal-front:latest
     volumes:
-      - ./front/nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./front/nginx/raspberry.crt:/etc/nginx/ssl/raspberry.crt:ro
-      - ./front/nginx/raspberry_private.key:/etc/nginx/ssl/raspberry_private.key:ro
+      - ./front/nginx/lalainaetguillaume.zapto.org.conf:/etc/nginx/conf.d/lalainaetguillaume.zapto.org.conf
+      - ./front/nginx/certbot/conf:/etc/letsencrypt
+      - ./front/nginx/certbot/www:/var/www/certbot
     ports:
       - 80:80
       - 443:443
     depends_on:
       - ggportal-back
+
+  ggportal-certbot:
+    container_name: ggportal-certbot
+    image: certbot/certbot:arm32v6-latest
+    volumes:
+      - ./front/nginx/certbot/conf:/etc/letsencrypt
+      - ./front/nginx/certbot/www:/var/www/certbot
 
   ggportal-back:
     container_name: ggportal-back
