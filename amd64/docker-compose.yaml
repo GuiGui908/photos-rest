@@ -3,7 +3,7 @@ version: "3.8"
 services:
   ggportal-front:
     container_name: ggportal-front
-    image: registry.gitlab.com/shulkio/ggportal-front:latest
+    image: registry.gitlab.com/shulkio/ggportal-front:dev
     volumes:
       - ./front/nginx/default.conf:/etc/nginx/conf.d/default.conf
     ports:
@@ -14,7 +14,7 @@ services:
 
   ggportal-back:
     container_name: ggportal-back
-    image: registry.gitlab.com/shulkio/ggportal-back:latest
+    image: registry.gitlab.com/shulkio/ggportal-back:dev
     volumes:
       - ./back/conf/application.properties:/application.properties:ro
     ports:
