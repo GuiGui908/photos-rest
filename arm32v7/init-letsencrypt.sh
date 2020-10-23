@@ -5,7 +5,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(lalainaetguillaume.zapto.org)
+domains=(lalainaetguillaume.zapto.org godgiven.fr www.godgiven.fr)
 rsa_key_size=4096
 data_path="./front/nginx/certbot"
 email="guillaume.bert13@gmail.com" # Adding a valid address is strongly recommended
