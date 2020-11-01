@@ -8,9 +8,12 @@ services:
       - ./front/nginx/lalainaetguillaume.zapto.org.conf:/etc/nginx/conf.d/lalainaetguillaume.zapto.org.conf
       - ./front/nginx/certbot/conf:/etc/letsencrypt
       - ./front/nginx/certbot/www:/var/www/certbot
+      - storage:/usr/share/nginx/html/storage
     ports:
       - 80:80
       - 443:443
+    networks:
+      - gg-application
     depends_on:
       - ggportal-back
 
@@ -20,14 +23,19 @@ services:
     volumes:
       - ./front/nginx/certbot/conf:/etc/letsencrypt
       - ./front/nginx/certbot/www:/var/www/certbot
+    networks:
+      - gg-application
 
   ggportal-back:
     container_name: ggportal-back
     image: arm32v7/ggportal-back:latest
     volumes:
       - ./back/conf/application.properties:/application.properties:ro
+      - storage:/storage
     ports:
       - 8080:8080
+    networks:
+      - gg-application
     depends_on:
       - ggportal-db
   
@@ -43,9 +51,22 @@ services:
       - ./db/data:/var/lib/postgresql/data
     ports:
       - 5432:5432
+    networks:
+      - gg-application
 
   ggportal-adminer:
     container_name: ggportal-adminer
     image: arm32v7/adminer
     ports:
       - 8090:8080
+    networks:
+      - gg-application
+
+volumes:
+  storage:
+    external: true
+
+networks:
+  gg-application:
+    external:
+      name: gg-application
