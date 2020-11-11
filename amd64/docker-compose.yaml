@@ -39,4 +39,4 @@ services:
     container_name: ggportal-adminer
     image: adminer
     ports:
-      - 8090:8080
+      - 8070:8080

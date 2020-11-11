@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+#  ggportal-front:
+#    container_name: ggportal-front
+#    image: registry.gitlab.com/shulkio/ggportal-front:dev
+#    volumes:
+#      - ./front/nginx/default.conf:/etc/nginx/conf.d/default.conf
+#      - ./front/nginx/static:/usr/share/nginx/html/static
+#    ports:
+#      - 80:80
+#      - 443:443
+#    depends_on:
+#      - ggportal-back
+
+  ggmemories-back:
+    container_name: ggmemories-back
+    image: registry.gitlab.com/shulkio/ggmemories-back:dev
+    volumes:
+      - ./back/conf/application.properties:/application.properties:ro
+    ports:
+      - 8090:8080
+    networks:
+      - amd64_default
+
+networks:
+  amd64_default:
+    external:
+      name: amd64_default
