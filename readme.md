@@ -29,4 +29,7 @@ Git installed
     run the script /home/pi/deployment/ggportal-back.sh
 
 
+TODO : create  a diagram of the docker compose with ports
 
+TODO : list error codes
+       list endpoints with funtional rules
