@@ -5,7 +5,7 @@ echo "TODO Here download the latest artifacts from gitlab... curl xxx and unzip 
 echo ==============================================================================
 
 # Rebuild backend image
-cd /home/pi/ggportal-back
+cd /home/pi/ggportal-back/impl
 docker build -t arm32v7/ggportal-back .
 
 # Redeploy the newly created image
