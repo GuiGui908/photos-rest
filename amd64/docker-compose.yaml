@@ -16,7 +16,7 @@ services:
     container_name: ggportal-back
     image: registry.gitlab.com/shulkio/ggportal-back:dev
     volumes:
-      - ./back/conf/application.properties:/application.properties:ro
+      - ./back/conf/application.properties:/application-prod.properties:ro
     ports:
       - 8080:8080
     depends_on:

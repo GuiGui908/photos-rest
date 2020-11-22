@@ -30,7 +30,7 @@ services:
     container_name: ggportal-back
     image: arm32v7/ggportal-back:latest
     volumes:
-      - ./back/conf/application.properties:/application.properties:ro
+      - ./back/conf/application.properties:/application-prod.properties:ro
       - storage:/storage
     ports:
       - 8080:8080
